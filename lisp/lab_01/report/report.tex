@@ -1,0 +1,370 @@
+\documentclass[a4paper,14pt, unknownkeysallowed]{extreport}
+
+\usepackage{cmap} % Улучшенный поиск русских слов в полученном pdf-файле
+\usepackage[T2A]{fontenc} % Поддержка русских букв
+\usepackage[utf8]{inputenc} % Кодировка utf8
+\usepackage[english,russian]{babel} % Языки: русский, английский
+\usepackage{enumitem}
+
+
+\usepackage{threeparttable}
+
+\usepackage[14pt]{extsizes}
+
+\usepackage{caption}
+\captionsetup{labelsep=endash}
+\captionsetup[figure]{name={Рисунок}}
+
+% \usepackage{ctable}
+% \captionsetup[table]{justification=raggedleft,singlelinecheck=off}
+
+\usepackage{amsmath}
+
+\usepackage{geometry}
+\geometry{left=30mm}
+\geometry{right=10mm}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+
+\usepackage{titlesec}
+\titleformat{\section}
+	{\normalsize\bfseries}
+	{\thesection}
+	{1em}{}
+\titlespacing*{\chapter}{0pt}{-30pt}{8pt}
+\titlespacing*{\section}{\parindent}{*4}{*4}
+\titlespacing*{\subsection}{\parindent}{*4}{*4}
+
+\usepackage{setspace}
+\onehalfspacing % Полуторный интервал
+
+\frenchspacing
+\usepackage{indentfirst} % Красная строка
+
+\usepackage{titlesec}
+\titleformat{\chapter}{\LARGE\bfseries}{\thechapter}{20pt}{\LARGE\bfseries}
+\titleformat{\section}{\Large\bfseries}{\thesection}{20pt}{\Large\bfseries}
+
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Для листинга кода:
+\lstset{%
+	language=python,   					% выбор языка для подсветки	
+	basicstyle=\small\sffamily,			% размер и начертание шрифта для подсветки кода
+	numbers=left,						% где поставить нумерацию строк (слева\справа)
+	numberstyle=\tiny,		     		% размер шрифта для номеров строк
+	stepnumber=1,						% размер шага между двумя номерами строк
+	numbersep=5pt,						% как далеко отстоят номера строк от подсвечиваемого кода
+	frame=single,						% рисовать рамку вокруг кода
+	tabsize=4,							% размер табуляции по умолчанию равен 4 пробелам
+	captionpos=t,						% позиция заголовка вверху [t] или внизу [b]
+	breaklines=true,					
+	breakatwhitespace=true,				% переносить строки только если есть пробел
+	backgroundcolor=\color{white},
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{gray}
+	showspaces=false,
+    showstringspaces=false
+}
+
+
+\usepackage{pgfplots}
+\usetikzlibrary{datavisualization}
+\usetikzlibrary{datavisualization.formats.functions}
+
+
+\lstset{
+	literate=
+	{а}{{\selectfont\char224}}1
+	{б}{{\selectfont\char225}}1
+	{в}{{\selectfont\char226}}1
+	{г}{{\selectfont\char227}}1
+	{д}{{\selectfont\char228}}1
+	{е}{{\selectfont\char229}}1
+	{ж}{{\selectfont\char230}}1
+	{з}{{\selectfont\char231}}1
+	{и}{{\selectfont\char232}}1
+	{й}{{\selectfont\char233}}1
+	{к}{{\selectfont\char234}}1
+	{л}{{\selectfont\char235}}1
+	{м}{{\selectfont\char236}}1
+	{н}{{\selectfont\char237}}1
+	{о}{{\selectfont\char238}}1
+	{п}{{\selectfont\char239}}1
+	{р}{{\selectfont\char240}}1
+	{с}{{\selectfont\char241}}1
+	{т}{{\selectfont\char242}}1
+	{у}{{\selectfont\char243}}1
+	{ф}{{\selectfont\char244}}1
+	{х}{{\selectfont\char245}}1
+	{ц}{{\selectfont\char246}}1
+	{ч}{{\selectfont\char247}}1
+	{ш}{{\selectfont\char248}}1
+	{щ}{{\selectfont\char249}}1
+	{ъ}{{\selectfont\char250}}1
+	{ы}{{\selectfont\char251}}1
+	{ь}{{\selectfont\char252}}1
+	{э}{{\selectfont\char253}}1
+	{ю}{{\selectfont\char254}}1
+	{я}{{\selectfont\char255}}1
+	{А}{{\selectfont\char192}}1
+	{Б}{{\selectfont\char193}}1
+	{В}{{\selectfont\char194}}1
+	{Г}{{\selectfont\char195}}1
+	{Д}{{\selectfont\char196}}1
+	{Е}{{\selectfont\char197}}1
+	{Ж}{{\selectfont\char198}}1
+	{З}{{\selectfont\char199}}1
+	{И}{{\selectfont\char200}}1
+	{Й}{{\selectfont\char201}}1
+	{К}{{\selectfont\char202}}1
+	{Л}{{\selectfont\char203}}1
+	{М}{{\selectfont\char204}}1
+	{Н}{{\selectfont\char205}}1
+	{О}{{\selectfont\char206}}1
+	{П}{{\selectfont\char207}}1
+	{Р}{{\selectfont\char208}}1
+	{С}{{\selectfont\char209}}1
+	{Т}{{\selectfont\char210}}1
+	{У}{{\selectfont\char211}}1
+	{Ф}{{\selectfont\char212}}1
+	{Х}{{\selectfont\char213}}1
+	{Ц}{{\selectfont\char214}}1
+	{Ч}{{\selectfont\char215}}1
+	{Ш}{{\selectfont\char216}}1
+	{Щ}{{\selectfont\char217}}1
+	{Ъ}{{\selectfont\char218}}1
+	{Ы}{{\selectfont\char219}}1
+	{Ь}{{\selectfont\char220}}1
+	{Э}{{\selectfont\char221}}1
+	{Ю}{{\selectfont\char222}}1
+	{Я}{{\selectfont\char223}}1
+}
+
+\usepackage{graphicx}
+\newcommand{\img}[3] {
+	\begin{figure}[h!]
+		\center{\includegraphics[height=#1]{img/#2}}
+		\caption{#3}
+		\label{img:#2}
+	\end{figure}
+}
+
+
+\usepackage[justification=centering]{caption} % Настройка подписей float объектов
+
+\usepackage[unicode,pdftex]{hyperref} % Ссылки в pdf
+\hypersetup{hidelinks}
+
+\usepackage{csvsimple}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\usepackage{longtable}
+
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{floatrow}
+
+\floatsetup[longtable]{LTcapwidth=table}
+
+% \def\UrlBreaks{\do\/\do-\do\_}
+
+\makeatletter
+\renewcommand*\l@chapter[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode \bfseries
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak\normalfont\leaders\hbox{$\m@th
+        \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+        mu$}\hfill\nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+\makeatother
+
+\begin{document}
+
+
+
+\begin{titlepage}
+	\newgeometry{pdftex, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+	\fontsize{12pt}{12pt}\selectfont
+	\noindent \begin{minipage}{0.15\textwidth}
+		\includegraphics[width=\linewidth]{img/b_logo.jpg}
+	\end{minipage}
+	\noindent\begin{minipage}{0.9\textwidth}\centering
+		\textbf{Министерство науки и высшего образования Российской Федерации}\\
+		\textbf{Федеральное государственное бюджетное образовательное учреждение высшего образования}\\
+		\textbf{«Московский государственный технический университет имени Н. Э.~Баумана}\\
+		\textbf{(национальный исследовательский университет)»}\\
+		\textbf{(МГТУ им. Н. Э.~Баумана)}
+	\end{minipage}
+	
+	\noindent\rule{18cm}{3pt}
+	\newline\newline
+	\noindent ФАКУЛЬТЕТ $\underline{\text{«Информатика и системы управления»~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}$ \newline\newline
+	\noindent КАФЕДРА $\underline{\text{«Программное обеспечение ЭВМ и информационные технологии»~~~~~~~~~~~~~~~~~~~~~~~}}$\newline\newline\newline\newline\newline\newline\newline
+	
+	
+	\begin{center}
+		\noindent\begin{minipage}{1.3\textwidth}\centering
+		\Large\textbf{   ~~~ Лабораторная работа №1}\newline
+		\textbf{по курсу "Функциональное}\newline
+		\textbf{и логическое программирование"}\newline\newline\newline
+		\end{minipage}
+	\end{center}
+	
+	\noindent\textbf{Тема} 			$\underline{\text{Списки в Lisp. Использование стандартных функций}}$\newline\newline
+	\noindent\textbf{Студент} 		$\underline{\text{Ковалец К. Э.}}$\newline\newline
+	\noindent\textbf{Группа} 		$\underline{\text{ИУ7-63Б}}$\newline\newline
+	\noindent\textbf{Преподаватели} $\underline{\text{Толпинская Н. Б., Строганов Ю. В.}}$\newline
+	
+	\begin{center}
+		\vfill
+		Москва~---~\the\year
+		~г.
+	\end{center}
+	\restoregeometry
+\end{titlepage}
+
+
+
+\setcounter{page}{2}
+\chapter{Практические задания}
+
+Практические задания приложены к отчету.
+
+\chapter{Ответы на теоретические вопросы к лабораторной работе}
+
+\section{Элементы языка: определение, синтаксис, представление в памяти}
+
+\subsection{Определение}
+
+Вся информация (данные и программы) в Lisp представляются в виде символьных выражений -- S-выражений. По определению:
+
+\begin{center}
+\captionsetup{justification=raggedright,singlelinecheck=off}
+\begin{lstlisting}
+	S-выражение ::= <атом> | <точечная пара>
+\end{lstlisting}
+\end{center}	
+
+\textbf{Атомы} могут быть следующими.
+
+\begin{enumerate}
+	\item Символы (идентификаторы) -- синтаксически представляется как набор букв и цифр, начинающийся с буквы.
+	\item Специальные символы -- T, Nil (используются для обозначения логи- ческих констант).
+	\begin{itemize}
+		\item T -- обозначает логическое значение <<Истина>>, истинным значением является все, отличное от Nil.
+		\item Nil -- обозначает логическое значение <<Ложь>>, также обозначает пустой список.
+	\end{itemize}
+	\item Самоопределимые атомы -- натуральные числа, дробные числа, веще- ственные числа, строки -- последовательность символов, заключенных в двойные апострофы (например "abc").
+\end{enumerate}
+
+\textbf{Точечная пара} -- (A.B). Cтроится с помощью бинарного узла.
+
+\begin{center}
+\captionsetup{justification=raggedright,singlelinecheck=off}
+\begin{lstlisting}
+	Точечная пара ::= (<атом>.<атом>) | 
+					  (<атом>.<точечная пара>) |
+					  (<точечная пара>.<атом>) | 
+					  (<точечная пара>.<точечная пара>)
+\end{lstlisting}
+\end{center}	
+
+\textbf{Список} -- динамическая структура данных, которая может быть пустой или непустой. Если она не пустая, то состоит из двух элементов:
+
+\begin{enumerate}
+	\item голова -- любая структура;
+	\item хвост -- список.
+\end{enumerate}
+
+\begin{center}
+\captionsetup{justification=raggedright,singlelinecheck=off}
+\begin{lstlisting}
+	Список ::= <пустой список> | <непустой список>, где 
+			   <пустой список> ::= () | Nil ,
+			   <непустой список> ::= (<первый элемент>.<хвост>), 
+			   <первый элемент> ::= <S-выражение>,
+			   <хвост> ::= <список>.
+\end{lstlisting}
+\end{center}	
+
+\subsection{Синтаксис}
+
+Любая структура (точечная пара или список) заключается в круглые
+скобки (A.B) -- точечная пара, (А) -- список из одного элемента, пустой список изображается как Nil или ().
+
+Непустой список можно записать следующими образами: (А.(B.(C.(D())))) или (A B C D).
+
+Элементы списка могут, в свою очередь, быть списками (любой список за- ключается в круглые скобки), например — (А (B C) (D (E))). Таким образом, синтаксически наличие скобок является признаком структуры — списка или точечной пары.
+
+\subsection{Представление в памяти}
+
+Любая непустая структура Lisp в памяти представляется списковой ячейкой, хранящей два указателя: на голову и хвост.
+
+\clearpage
+
+\begin{enumerate}
+	\item (A.B) — точечная пара.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.45]{img/picture1.png}
+		\caption{Представление в памяти (A.B)}
+		\label{fig:picture1}
+	\end{figure} 
+
+	\item (A B) — список из двух элементов.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.5]{img/picture2.png}
+		\caption{Представление в памяти (A B)}
+		\label{fig:picture2}
+	\end{figure} 
+\end{enumerate}
+
+
+\section{Особенности языка Lisp. Структура программы. Символ апостроф}
+
+Особенности языка Lisp следующие.
+
+\begin{enumerate}
+	\item В Lisp используется символьная обработка.
+	\item Программа может быть представлена в виде данных, поэтому она может изменять сама себя.
+	\item Lisp является бестиповым языком, так как он работает только на указателях.
+	\item Память выделяется блоками. LISP сам распределяет память.
+	\item Программа и данные в LISP представлены списками.
+\end{enumerate}
+
+Символ апостроф (<<'>>) — блокирует вычисление своего аргумента. В качестве своего значения выдает сам аргумент, не вычисляя его. Перед константами -- числами и атомами T и Nil апостроф можно не ставить.
+
+\section{Базис языка Lisp. Ядро языка}
+
+\textbf{Базис языка} -- минимальный набор конструкций языка и структур данных, с помощью которых можно решить любую задачу.
+
+Базис языка Lisp состоит из:
+
+\begin{enumerate}
+	\item структур, атомов;
+	\item примитивных функций (car, cdr);
+	\item специальных функций, управляющих обработкой структур, представляющих вычислимые выражения (quote).
+\end{enumerate}
+
+\textbf{Ядро} -- основные действия, которые наиболее часто используются. Ядро шире, чем базис.
+
+\end{document}
