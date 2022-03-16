@@ -1,17 +1,129 @@
+;; мои функции
+
+;; 1) my-reverse
+
+(defun my-reverse-rec (lst rev-lst)
+    (cond 
+        ((null lst)
+            rev-lst)
+        (T 
+            (my-reverse-rec (cdr lst) (cons (car lst) rev-lst)))
+    )
+)
+
+(defun my-reverse (lst)
+    (my-reverse-rec lst nil))
+
+;; (MY-REVERSE '(1 2 3 4 5)) -> (5 4 3 2 1)
+
+;; 2) my-length
+
+(defun my-length-rec (set len)
+    (cond 
+        ((null set)
+            len)
+        (T 
+            (my-length-rec (cdr set) (+ len 1)))
+    )
+)
+
+(defun my-length (set)
+    (my-length-rec set 0))
+
+;; (MY-LENGTH '(1 2 3 4)) -> 4
+
+;; 3) my-last
+
+(defun my-last (lst)
+    (cond 
+        ((null (cdr lst))
+            (list (car lst)))
+        (T 
+            (my-last (cdr lst)))
+    )
+)
+
+;; (MY-LAST '(1 2 4 5)) -> (5)
+
+;; 4) my-append
+
+(defun my-append (lst1 lst2)
+    (cond 
+        ((null lst1)
+            lst2)
+        (T 
+            (cons (car lst1) (my-append (cdr lst1) lst2)))
+    )
+)
+
+;; (MY-APPEND '(1 2 3) '(4 5 6)) -> (1 2 3 4 5 6)
+
+;; 4) my-sort
+
+(defun find-min-elem-rec (lst cur_min)
+    (cond 
+        ((null lst)
+            cur_min)
+        (T 
+            (find-min-elem-rec (cdr lst) 
+                (cond 
+                    ((< (car lst) cur_min)
+                        (setf cur_min (car lst)))
+                    (T 
+                        cur_min))))
+    )
+)
+
+(defun find-min-elem (lst)
+    (find-min-elem-rec lst (car lst)))
+
+(defun insert (lst elem elem_instead)
+    (cond 
+        ((null lst)
+            elem_instead)
+        ((eql (car lst) elem_instead)
+            (setf (car lst) elem))
+        (T 
+            (insert (cdr lst) elem elem_instead))
+    )
+)
+
+(defun my-sort-rec (res_lst lst)
+    (let* ((min_elem (find-min-elem lst)))
+        (cond 
+            ((null lst)
+                res_lst)
+            (T 
+                (insert lst (car lst) min_elem)
+                (my-sort-rec 
+                    (my-append res_lst (list min_elem))
+                    (cdr lst)))
+        )
+    )
+)
+
+(defun my-sort (lst)
+    (let* ((res_lst NIL))
+        (my-sort-rec res_lst lst)
+    )
+)
+
+;; (MY-SORT '(4 7 2 2 8 1 3)) -> (1 2 2 3 4 7 8)
+
+
 ;; 1. Написать функцию, которая по своему списку-аргументу lst определяет является ли он палиндромом (то есть равны ли lst и (reverse lst)).
 
 (defun compare (lst1 lst2)
     (cond 
         ((null lst1)
             T)
-        ((equal (car lst1) (car lst2)) 
+        ((eql (car lst1) (car lst2)) 
             (compare (cdr lst1) (cdr lst2)))
-        (T NIL)
     )
 )
 
 (defun palindrome (lst)
-    (compare lst (reverse lst)))
+    (compare lst (my-reverse lst)))
 
 ;; (palindrome '(1 2 3 2 1)) -> T
 ;; (palindrome '(1 2 3 2)) -> NIL
@@ -23,7 +135,7 @@
     (cond 
         ((null set)
             NIL)
-        ((equal elem (car set)) 
+        ((eql elem (car set)) 
             T)
         (T
             (elem-in-set elem (cdr set)))
@@ -36,14 +148,13 @@
             T)
         ((elem-in-set (car set1) set2) 
             (check-set-equal (cdr set1) set2))
-        (T NIL)
     )
 )
 
+
 (defun set-equal (set1 set2)
-    (if (equal (length set1) (length set2))
+    (if (eql (my-length set1) (my-length set2))
         (check-set-equal set1 set2)
-        NIL
     )
 )
 
@@ -58,7 +169,7 @@
     (cond 
         ((null table) 
             Nil)
-        ((eq country (caar table)) 
+        ((eql country (caar table)) 
             (cdar table)) 
         (T 
             (find-capital country (cdr table)))
@@ -69,7 +180,7 @@
     (cond 
         ((null table) 
             Nil)
-        ((eq capital (cdar table)) 
+        ((eql capital (cdar table)) 
             (caar table)) 
         (T 
             (find-country capital (cdr table)))
@@ -94,11 +205,22 @@
 ;; 4. Напишите функцию swap-first-last, которая переставляет в списке-аргументе первый и последний элементы.
 
 (defun swap-first-last (lst)
-    (append (last lst) 
-            (reverse (cdr (reverse (cdr lst))))
-            (list (car lst))
+    (my-append
+        (my-append (my-last lst) 
+                  (my-reverse (cdr (my-reverse (cdr lst))))
+        )
+        (list (car lst))
     )
 ) 
+
+
+
+(defun swap-first-last (lst)
+    (my-append 
+        (cons (car (my-reverse lst)) (my-reverse (cdr (my-reverse (cdr lst)))))
+        (list (car lst))
+    )
+)
 
 ;; (SWAP-FIRST-LAST '(1 2 3 4 5)) -> (5 2 3 4 1)
 
@@ -109,7 +231,7 @@
     (cond
         ((null lst)
             NIL)
-        ((equal i 0)
+        ((eql i 0)
             (car lst))
         (T 
             (get-elem (cdr lst) (- i 1)))
@@ -120,7 +242,7 @@
     (cond
         ((null lst)
             NIL)
-        ((equal i 0)
+        ((eql i 0)
             (setf (car lst) elem))
         (T 
             (set-elem (cdr lst) elem (- i 1)))
@@ -141,12 +263,12 @@
 ;; 6. Напишите две функции, swap-to-left и swap-to-right, которые производят одну круговую перестановку в списке-аргументе влево и вправо, соответственно.
 
 (defun swap-to-left (lst)
-    (append (cdr lst) (list (car lst))))
+    (my-append (cdr lst) (list (car lst))))
 
 ;; (SWAP-TO-LEFT '(1 2 3 4)) -> (2 3 4 1)
 
 (defun swap-to-right (lst)
-    (append (last lst) (reverse (cdr (reverse lst)))))
+    (my-append (my-last lst) (my-reverse (cdr (my-reverse lst)))))
 
 ;; (SWAP-TO-RIGHT '(1 2 3 4)) -> (4 1 2 3)
 
@@ -157,7 +279,7 @@
     (cond 
         ((null set1)
             T)
-        ((equal (car set1) (car set2)) 
+        ((eql (car set1) (car set2)) 
             (check-set-equal (cdr set1) (cdr set2)))
         (T 
             NIL)
@@ -165,9 +287,8 @@
 )
 
 (defun set-equal (set1 set2)
-    (if (equal (length set1) (length set2))
+    (if (eql (my-length set1) (my-length set2))
         (check-set-equal set1 set2)
-        NIL
     )
 )
 
@@ -185,7 +306,7 @@
 (defun add-list (lst new_lst)
     (if (is-sublist lst new_lst)
         lst
-        (append lst (list new_lst))
+        (my-append lst (list new_lst))
     )
 )
 
@@ -231,7 +352,7 @@
                     (> cur_elem b1)
                     (< cur_elem b2))
                 (find-right-numbers 
-                    (append res_lst (list cur_elem))
+                    (my-append res_lst (list cur_elem))
                     (cdr lst) b1 b2))
             (T 
                 (find-right-numbers res_lst (cdr lst) b1 b2))
@@ -240,8 +361,8 @@
 )
 
 (defun select-between (lst b1 b2)
-    (let* ((res_lst ()))
-        (sort (find-right-numbers res_lst lst b1 b2) #'<)
+    (let* ((res_lst NIL))
+        (my-sort (find-right-numbers res_lst lst b1 b2))
     )
 )
 

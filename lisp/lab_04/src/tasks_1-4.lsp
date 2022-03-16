@@ -51,7 +51,6 @@
 
 (defun without-last-elem-2 (lst)
     (if (cdr lst)
-        (cons (car lst) (without-last-elem-2 (cdr lst)))
-        ()))
+        (cons (car lst) (without-last-elem-2 (cdr lst)))))
 
 ;; (WITHOUT-LAST-ELEM-2 '(1 2 3)) -> (1 2)

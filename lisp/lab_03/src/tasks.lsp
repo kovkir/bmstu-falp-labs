@@ -21,7 +21,8 @@
 ;; 3. Написать функцию, которая принимает два числа и возвращает список из этих чисел, расположенный по возрастанию.
 
 (defun ascending-list (num1 num2)
-    (if (> num1 num2) (list num2 num1) (list num1 num2)))
+    (if (> num1 num2) 
+        (list num2 num1) (list num1 num2)))
 
 ;; (ASCENDING-LIST 1 2) -> (1 2)
 ;; (ASCENDING-LIST 2 1) -> (1 2)
@@ -80,7 +81,10 @@
 
 (defun between (num1 num2 num3)
     (if (> num1 num2) 
-        (< num1 num3) (> num1 num3)))
+        (< num1 num3)
+
+        (if (< num1 num2) 
+            (> num1 num3))))
 
 ;; С использованием COND
 

@@ -282,7 +282,8 @@
 \captionsetup{justification=raggedright,singlelinecheck=off}
 \begin{lstlisting}[label=lst:parallel_processing,caption=Решение задания 3]
 (defun ascending-list (num1 num2)
-    (if (> num1 num2) (list num2 num1) (list num1 num2)))
+    (if (> num1 num2) 
+		(list num2 num1) (list num1 num2)))
 
 ;; (ASCENDING-LIST 1 2) -> (1 2)
 ;; (ASCENDING-LIST 2 1) -> (1 2)
@@ -377,8 +378,11 @@
 ;; С использованием IF
 
 (defun between (num1 num2 num3)
-	(if (> num1 num2) 
-		(< num1 num3) (> num1 num3)))
+    (if (> num1 num2) 
+        (< num1 num3)
+
+        (if (< num1 num2) 
+            (> num1 num3))))
 
 ;; С использованием COND
 
@@ -398,6 +402,8 @@
 ;; (BETWEEN 4 3 2) -> NIL
 \end{lstlisting}
 \end{center}
+
+\clearpage
 
 \section{Задание 9}
 
@@ -463,12 +469,12 @@
 Функции в Lisp классифицируют следующим образом:
 
 \begin{itemize}
-	\item чистые математические функции;
+	\item чистые математические функции (имеют фиксированное кол-во аргументов и один результат);
 	\item рекурсивные функции;
 	\item специальные функции -- формы (прнимают произвольное число аргументов или по разному обрабатывают аргументы);
 	\item псевдофункции (создают эффект на внешнем устройстве);
 	\item функции с вариативными значениями, из которых выбирается одно;
-	\item функции высших порядков -- функционалы (используются для построения синтаксически управляемых программ).
+	\item функции высших порядков -- функционалы (используются для создания синтаксически управляемых программ).
 \end{itemize}
 
 По назначению функции разделяются следующим образом:
