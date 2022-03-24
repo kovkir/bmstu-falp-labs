@@ -103,10 +103,7 @@
 )
 
 (defun my-sort (lst)
-    (let* ((res_lst NIL))
-        (my-sort-rec res_lst lst)
-    )
-)
+    (my-sort-rec NIL lst))
 
 ;; (MY-SORT '(4 7 2 2 8 1 3)) -> (1 2 2 3 4 7 8)
 
@@ -204,23 +201,17 @@
 
 ;; 4. Напишите функцию swap-first-last, которая переставляет в списке-аргументе первый и последний элементы.
 
-(defun swap-first-last (lst)
-    (my-append
-        (my-append (my-last lst) 
-                  (my-reverse (cdr (my-reverse (cdr lst))))
-        )
-        (list (car lst))
-    )
-) 
-
-
-
-(defun swap-first-last (lst)
-    (my-append 
-        (cons (car (my-reverse lst)) (my-reverse (cdr (my-reverse (cdr lst)))))
-        (list (car lst))
+(defun swap-first-last-rec (first_elem rev_lst lst)
+    (cond
+        ((null (cdr lst))
+            (my-append (cons (car lst) (my-reverse rev_lst)) (list first_elem)))
+        (T  
+            (swap-first-last-rec first_elem (cons (car lst) rev_lst) (cdr lst)))
     )
 )
+
+(defun swap-first-last (lst)
+    (swap-first-last-rec (car lst) NIL (cdr lst)))
 
 ;; (SWAP-FIRST-LAST '(1 2 3 4 5)) -> (5 2 3 4 1)
 
